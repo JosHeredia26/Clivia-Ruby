@@ -16,8 +16,16 @@ class TriviaGenerator
     # welcome message
     print_welcome
     # prompt the user for an action
-    _action = select_main_menu_action
+    action = select_main_menu_action
     # keep going until the user types exit
+    until action == "exit"
+      case action
+      when "random" then random_trivia
+      when "scores" then print_scores
+      end
+      print_welcome
+      action = select_main_menu_action
+    end
   end
 
   def random_trivia
