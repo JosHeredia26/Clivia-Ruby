@@ -27,8 +27,16 @@ module Requester
     # prompt the user to give the score a name if there is no name given, set it as Anonymous
   end
 
-  def get_number(max: 100_000)
+  def get_number(length)
     # prompt the user for a number between 1 and the maximum number of options
+    print "> "
+    election = gets.chomp.to_i
+    until election < length && election.positive?
+      puts "Invalid option"
+      print "> "
+      election = gets.chomp.to_i
+    end
+    election
   end
 
   def gets_option(prompt, options)

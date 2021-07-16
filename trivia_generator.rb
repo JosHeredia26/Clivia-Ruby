@@ -53,6 +53,7 @@ class TriviaGenerator
       puts "#{index + 1}. #{@decoder.decode(e)}"
     end
     # if response is correct, put a correct message and increase score
+    p get_number(questions[:incorrect_answers].length + 1)
     # if response is incorrect, put an incorrect message, and which was the correct answer
     # once the questions end, show user's score and promp to save it
   end
