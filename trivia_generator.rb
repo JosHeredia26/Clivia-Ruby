@@ -1,4 +1,5 @@
 # do not forget to require your gem dependencies
+require "htmlentities"
 # do not forget to require_relative your local dependencies
 require_relative "presenter"
 require_relative "requester"
@@ -12,6 +13,8 @@ class TriviaGenerator
   def initialize
     # we need to initialize a couple of properties here
     @questions = []
+    @decoder = HTMLEntities.new
+    @score = 0
   end
 
   def start
@@ -33,6 +36,13 @@ class TriviaGenerator
   def random_trivia
     # load the questions from the api
     # questions are loaded, then let's ask them
+    load_questions.each do |questions|
+      puts "Category: #{@decoder.decode(questions[:category])} | Difficulty: #{@decoder.decode(questions[:difficulty])}"
+      # ask_questions(questions)
+      puts "Well done! Your score is #{@score}"
+      puts "--------------------------------------------------"
+      puts "Do you want to save your score? y/n "
+    end
   end
 
   def ask_questions
