@@ -38,15 +38,16 @@ class TriviaGenerator
     # questions are loaded, then let's ask them
     load_questions.each do |questions|
       puts "Category: #{@decoder.decode(questions[:category])} | Difficulty: #{@decoder.decode(questions[:difficulty])}"
-      # ask_questions(questions)
+      ask_questions(questions)
       puts "Well done! Your score is #{@score}"
       puts "--------------------------------------------------"
       puts "Do you want to save your score? y/n "
     end
   end
 
-  def ask_questions
+  def ask_questions(questions)
     # ask each question
+    puts "Question: #{@decoder.decode(questions[:question])}"
     # if response is correct, put a correct message and increase score
     # if response is incorrect, put an incorrect message, and which was the correct answer
     # once the questions end, show user's score and promp to save it
