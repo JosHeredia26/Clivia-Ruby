@@ -1,6 +1,6 @@
 module Presenter
   def print_welcome
-    print [
+    puts [
       "#" * 38,
       "#   Welcome to Validation Clibrary   #",
       "#" * 38
