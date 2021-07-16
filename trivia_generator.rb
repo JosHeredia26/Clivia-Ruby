@@ -2,6 +2,7 @@
 # do not forget to require_relative your local dependencies
 require_relative "presenter"
 require_relative "requester"
+require_relative "trivia_services"
 
 class TriviaGenerator
   # maybe we need to include a couple of modules?
@@ -10,6 +11,7 @@ class TriviaGenerator
 
   def initialize
     # we need to initialize a couple of properties here
+    @questions = []
   end
 
   def start
@@ -50,7 +52,8 @@ class TriviaGenerator
 
   def load_questions
     # ask the api for a random set of questions
-    parse_questions
+    @questions = TriviaAPI.index[:results]
+    # parse_questions
   end
 
   def parse_questions
