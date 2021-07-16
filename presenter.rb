@@ -1,6 +1,10 @@
 module Presenter
   def print_welcome
-    # print the welcome message
+    print [
+      "#" * 38,
+      "#   Welcome to Validation Clibrary   #",
+      "#" * 38
+    ].join("\n")
   end
 
   def print_score(score)
