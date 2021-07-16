@@ -1,10 +1,12 @@
 # do not forget to require your gem dependencies
 # do not forget to require_relative your local dependencies
 require_relative "presenter"
+require_relative "requester"
 
 class TriviaGenerator
   # maybe we need to include a couple of modules?
   include Presenter
+  include Requester
 
   def initialize
     # we need to initialize a couple of properties here
@@ -14,6 +16,7 @@ class TriviaGenerator
     # welcome message
     print_welcome
     # prompt the user for an action
+    _action = select_main_menu_action
     # keep going until the user types exit
   end
 
