@@ -67,7 +67,6 @@ class TriviaGenerator
       selected_alternative = e if selection == index + 1
     end
     ask_questions_refactorizing(selection, correct_index, selected_alternative, questions)
-    # once the questions end, show user's score and promp to save it
   end
 
   def ask_questions_refactorizing(selection, correct_index, selected_alternative, questions)
