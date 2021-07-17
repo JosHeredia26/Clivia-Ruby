@@ -7,8 +7,9 @@ module Requester
     puts options.join(" | ")
     print "> "
     input = gets.chomp.strip.downcase
+    puts ""
     until options.include?(input)
-      puts "Invalid option"
+      puts "Invalid option".red
       print "> "
       input = gets.chomp.strip.downcase
     end
@@ -29,7 +30,7 @@ module Requester
     options = %w[y n]
     action = gets.chomp.strip.downcase
     until options.include?(action)
-      print "Choose a correct alternative: y/n "
+      print "Choose a correct alternative: y/n ".red
       action = gets.chomp.strip.downcase
     end
     case action
@@ -53,7 +54,7 @@ module Requester
     print "> "
     election = gets.chomp.to_i
     until election < length && election.positive?
-      puts "Invalid option"
+      puts "Invalid option".red
       print "> "
       election = gets.chomp.to_i
     end

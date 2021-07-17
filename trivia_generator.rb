@@ -2,6 +2,7 @@
 require "htmlentities"
 require "json"
 require "terminal-table"
+require "colorize"
 # do not forget to require_relative your local dependencies
 require_relative "presenter"
 require_relative "requester"
@@ -90,18 +91,9 @@ class TriviaGenerator
     @score = 0
   end
 
-  def parse_scores
-    # get the scores data from file
-  end
-
   def load_questions
-    # ask the api for a random set of questions
+    # ask the api for a random set of questions and parse it
     @questions = TriviaAPI.index[:results]
-    # parse_questions
-  end
-
-  def parse_questions
-    # questions came with an unexpected structure, clean them to make it usable for our purposes
   end
 
   def print_scores
