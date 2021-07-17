@@ -13,12 +13,14 @@ class TriviaGenerator
   include Presenter
   include Requester
 
-  def initialize
+  def initialize(filename)
     # we need to initialize a couple of properties here
     @questions = []
     @decoder = HTMLEntities.new
     @score = 0
-    jsonstring = File.read("scores.json")
+    @filename = filename
+    File.open(@filename, "w") unless File.exist?(@filename)
+    jsonstring = File.read(@filename)
     @report = jsonstring.empty? ? [] : JSON.parse(jsonstring)
   end
 
@@ -84,7 +86,7 @@ class TriviaGenerator
   def save(data)
     # write to file the scores data
     @report << data
-    File.open("scores.json", "w") do |file|
+    File.open(@filename, "w") do |file|
       file.write @report.to_json
     end
     @score = 0
@@ -96,7 +98,7 @@ class TriviaGenerator
   end
 
   def print_scores
-    jsonstring = File.read("scores.json")
+    jsonstring = File.read(@filename)
     @report = jsonstring.empty? ? [] : JSON.parse(jsonstring)
     table = Terminal::Table.new
     table.title = "Top Scores"
@@ -110,5 +112,6 @@ class TriviaGenerator
   end
 end
 
-trivia = TriviaGenerator.new
+new_file = ARGV.shift
+trivia = TriviaGenerator.new(new_file.nil? ? "scores.json" : new_file)
 trivia.start
