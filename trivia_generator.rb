@@ -101,7 +101,10 @@ class TriviaGenerator
     table = Terminal::Table.new
     table.title = "Top Scores"
     table.headings = %w[Name Score]
-    table.rows = @report.sort { |x, y| y["score"] <=> x["score"] }.map { |unit| [unit["name"], unit["score"]] }
+    report_sorted = @report.sort { |x, y| y["score"] <=> x["score"] }.map { |unit| [unit["name"], unit["score"]] }
+    report_fifth = []
+    report_sorted.each_with_index { |e, index| (report_fifth << e if index < 5) }
+    table.rows = report_fifth
     puts table
     puts ""
   end
