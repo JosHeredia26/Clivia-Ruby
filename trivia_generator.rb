@@ -1,6 +1,7 @@
 # do not forget to require your gem dependencies
 require "htmlentities"
 require "json"
+require "terminal-table"
 # do not forget to require_relative your local dependencies
 require_relative "presenter"
 require_relative "requester"
@@ -47,6 +48,7 @@ class TriviaGenerator
     print_score(@score)
     puts "-" * 50
     will_save?(@score)
+    puts ""
   end
 
   def ask_questions(questions)
@@ -63,11 +65,11 @@ class TriviaGenerator
     @alternatives.each_with_index.map do |e, index|
       selected_alternative = e if selection == index + 1
     end
-    mmm(selection, correct_index, selected_alternative, questions)
+    ask_questions_refactorizing(selection, correct_index, selected_alternative, questions)
     # once the questions end, show user's score and promp to save it
   end
 
-  def mmm(selection, correct_index, selected_alternative, questions)
+  def ask_questions_refactorizing(selection, correct_index, selected_alternative, questions)
     # if response is correct, put a correct message and increase score
     if selection == correct_index
       puts "#{@decoder.decode(selected_alternative)}... Correct!"
@@ -81,6 +83,11 @@ class TriviaGenerator
 
   def save(data)
     # write to file the scores data
+    @report << data
+    File.open("scores.json", "w") do |file|
+      file.write @report.to_json
+    end
+    @score = 0
   end
 
   def parse_scores
@@ -98,7 +105,14 @@ class TriviaGenerator
   end
 
   def print_scores
-    # print the scores sorted from top to bottom
+    jsonstring = File.read("scores.json")
+    @report = jsonstring.empty? ? [] : JSON.parse(jsonstring)
+    table = Terminal::Table.new
+    table.title = "Top Scores"
+    table.headings = %w[Name Score]
+    table.rows = @report.sort { |x, y| y["score"] <=> x["score"] }.map { |unit| [unit["name"], unit["score"]] }
+    puts table
+    puts ""
   end
 end
 
