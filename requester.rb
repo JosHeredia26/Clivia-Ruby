@@ -32,9 +32,10 @@ module Requester
       print "Choose a correct alternative: y/n "
       action = gets.chomp.strip.downcase
     end
-    return unless action == "y"
-
-    saveif
+    case action
+    when "y" then saveif
+    when "n" then @score = 0
+    end
   end
 
   def saveif
@@ -43,18 +44,9 @@ module Requester
     print "> "
     name = gets.chomp
     name = name == "" ? "Anonymous" : name
-    dates = { score: @score, name: name }
-    @report << dates
-    File.open("scores.json", "w") do |file|
-      file.write @report.to_json
-    end
-    @score = 0
+    data = { score: @score, name: name }
+    save(data)
   end
-
-  # def save(dates)
-  #   p dates
-
-  # end
 
   def get_number(length)
     # prompt the user for a number between 1 and the maximum number of options
