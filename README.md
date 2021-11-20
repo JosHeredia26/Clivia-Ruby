@@ -1,66 +1,31 @@
 # CLIvia generator
 
+CLIvia is a general culture trivia game where you can answer many questions and see a rank table.
+Good luck!
+
 ## Before starting!
 
 1. Create a new folder with the project name and open it from VS Code
 
-## If on Linux/MacOS
+2. Clone the repository
 
-2. From the VS Code terminal run the next docker command
-
-```powershell
-docker container run \
---name ruby \
--it \
--v $(pwd):/app \
--v ssh:/root/.ssh \
--v bundle:/usr/local/bundle \
--e GIT_USER_NAME=<your_username> \
--e GIT_USER_EMAIL=<your_email> \
---rm \
-codeableorg/ruby
+```
+git clone git@github.com:JosHeredia26/Clivia-Ruby.git .
 ```
 
-## If on Windows
+3.  Run some initialization scripts
 
-2. From the VS Code terminal, select Powershell terminal, then run the next docker command
-
-```powershell
-docker container run \
---name ruby \
--it \
--v ${PWD}:/app \
--v ssh:/root/.ssh \
--v bundle:/usr/local/bundle \
--e GIT_USER_NAME=<your_username> \
--e GIT_USER_EMAIL=<your_email> \
---rm \
-codeableorg/ruby
+```
+bootstrap
 ```
 
-## Then
+4.  Install some necessary gems for rubocop to work properly
 
-3. Clone the repository of your work team
-
-```powershell
-$ git clone git@github.com:codeableorg/clivia-generator-xxx.git .
 ```
-
-4.  Run some initialization scripts
-
-```powershell
-$ bootstrap
-```
-
-5.  Install some necessary gems for rubocop to work properly
-
-```powershell
-$ bundle install
+bundle install
 ```
 
 ready, you can work on your project!
-
-Looking for the project instructions? Find them on [this notion doc](https://ableco.notion.site/Individual-CLIvia-generator-87e1fd914fe44580aab29f14abae1a04)
 
 To disable temporarily any Rubocop convention:
 
