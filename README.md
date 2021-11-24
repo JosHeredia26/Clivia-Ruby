@@ -1,6 +1,9 @@
 # CLIvia generator
 
 CLIvia is a general culture trivia game where you can answer many questions and see a rank table.
+
+![Project Image](project-image.PNG)
+
 Good luck!
 
 ## Before starting!
